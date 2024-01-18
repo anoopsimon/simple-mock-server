@@ -1,0 +1,41 @@
+{
+  "serverPort": 8000,
+  "endpoints": {
+    "/users": [
+      {
+        "method": "GET",
+        "responseCode": 200,
+        "response": [{"id": 1, "name": "John Doe"}, {"id": 2, "name": "Jane Smith"}]
+      },
+      {
+        "method": "POST",
+        "requiredHeaders": ["Authorization", "Content-Type"],
+        "responseCode": 201,
+        "requiredBody": {
+          "name": "string",
+          "email": "string",
+          "age": "integer"
+        },
+        "response": {"message": "User created successfully"}
+      }
+    ],
+    "/posts": [
+      {
+        "method": "GET",
+        "requiredHeaders": [],
+        "responseCode": 200,
+        "response": [{"id": 1, "title": "Hello World"}, {"id": 2, "title": "Java HTTP Server"}]
+      },
+      {
+        "method": "POST",
+        "requiredHeaders": ["Content-Type"],
+        "responseCode": 201,
+        "requiredBody": {
+          "title": "string",
+          "content": "string"
+        },
+        "response": {"message": "Post created successfully"}
+      }
+    ]
+  }
+}
