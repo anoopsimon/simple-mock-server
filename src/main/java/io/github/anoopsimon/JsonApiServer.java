@@ -1,3 +1,5 @@
+package io.github.anoopsimon;
+
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -15,9 +17,14 @@ import org.json.JSONException;
 public class JsonApiServer {
 
     public static void main(String[] args) throws IOException {
+        new JsonApiServer().start();
+    }
+
+    public void start() throws IOException {
+
 
 //        if (args.length < 1) {
-//            System.out.println("Usage: java -jar JsonApiServer.jar <path_to_json>");
+//            System.out.println("Usage: java -jar io.github.anoopsimon.JsonApiServer.jar <path_to_json>");
 //            return;
 //        }
 
