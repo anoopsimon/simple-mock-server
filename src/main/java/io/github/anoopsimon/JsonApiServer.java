@@ -16,11 +16,19 @@ import org.json.JSONException;
 
 public class JsonApiServer {
 
+    HttpServer server;
     public static void main(String[] args) throws IOException {
         new JsonApiServer().start();
     }
 
-    public void start() throws IOException {
+    public void stop() {
+        if(server!=null)
+        server.stop(0);
+    }
+
+
+        public void start() throws IOException {
+            String jsonContent = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"),"/src/main/java/io/github/anoopsimon/data/mock_data.json")));
 
 
 //        if (args.length < 1) {
@@ -32,13 +40,12 @@ public class JsonApiServer {
         //String jsonContent = new String(Files.readAllBytes(Paths.get(jsonFilePath)));
         //JSONObject apiData = new JSONObject(jsonContent);
 
-        String jsonContent = new String(Files.readAllBytes(Paths.get(System.getProperty("user.dir"),"/src/main/java/api.json")));
         JSONObject apiData = new JSONObject(jsonContent);
 
         int serverPort = apiData.getInt("serverPort");
         JSONObject endpoints = apiData.getJSONObject("endpoints");
 
-        HttpServer server = HttpServer.create(new InetSocketAddress(serverPort), 0);
+         server = HttpServer.create(new InetSocketAddress(serverPort), 0);
         endpoints.keySet().forEach(path -> {
             JSONArray methodsConfig = endpoints.getJSONArray(path);
             server.createContext(path, new AdvancedMethodHandler(methodsConfig));
